@@ -1,1 +1,1 @@
-# test_mysql_migration_teamcity
+# Testing Building of migrations in mysql
