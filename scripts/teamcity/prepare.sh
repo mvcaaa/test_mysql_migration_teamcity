@@ -1,7 +1,6 @@
 #/bin/bash
 
-COMPOSER_HOME = "$(pwd)/lib"
-export COMPOSER_HOME = $COMPOSER_HOME
+export COMPOSER_HOME = "$(pwd)/lib"
 printenv
 
 cd $COMPOSER_HOME
