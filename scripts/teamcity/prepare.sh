@@ -1,6 +1,6 @@
 #/bin/bash
 
-export COMPOSER_HOME ="$(pwd)/lib"
+export COMPOSER_HOME = "$(PWD)/lib"
 
 printenv
 php -v
