@@ -1,6 +1,6 @@
 #/bin/bash
 
-COMPOSER_HOME = "$(PWD)/lib"
+COMPOSER_HOME = "$(pwd)/lib"
 
 printenv
 
