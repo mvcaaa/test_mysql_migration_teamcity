@@ -1,0 +1,46 @@
+version: '2'
+
+volumes:
+  mysql_data: {}
+  mysql_backup: {}
+  teamcity_server_data: {}
+  teamcity_server_logs: {}
+
+services:
+  # postgres:
+  #   build: ./postgres
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - postgres_backup:/backups
+  #   env_file: .env
+  #   restart: always
+
+  mysql:
+    image: mysql
+    volumes:
+      - M:\mysql_data:/var/lib/mysql
+      - M:\mysql_backup:/backups
+    env_file: .env
+    ports:
+      - 33066:3306
+    restart: always
+
+  teamcity-server:
+    image: jetbrains/teamcity-server
+    volumes:
+      - ./server/data:/data/teamcity_server/datadir
+      - ./server/logs:/opt/teamcity/logs
+    ports:
+      - 8111:8111
+    depends_on:
+      - mysql
+    env_file: .env
+    restart: always
+
+  teamcity-agent:
+    build: ./docker/agents/phinx-nexus
+    env_file: .env
+    restart: always
+    depends_on:
+      - teamcity-server
+      - mysql
