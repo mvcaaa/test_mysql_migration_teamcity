@@ -3,8 +3,7 @@
 mysql --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --password="${PHINX_NEXUS_DB_PASSWORD}" -e "DROP DATABASE nexus_base;"
 mysql --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --password="${PHINX_NEXUS_DB_PASSWORD}" -e "CREATE DATABASE nexus_base;"
 mysql --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --password="${PHINX_NEXUS_DB_PASSWORD}" nexus_base < nexus_sql/nexus_base.sql
-
-mysqladmin --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --password="${PHINX_NEXUS_DB_PASSWORD}" create "${PHINX_NEXUS_DB_NAME}"
+mysql --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --password="${PHINX_NEXUS_DB_PASSWORD}" -e "CREATE DATABASE ${PHINX_NEXUS_DB_NAME};"
 
 cd "$(pwd)/lib"
 
