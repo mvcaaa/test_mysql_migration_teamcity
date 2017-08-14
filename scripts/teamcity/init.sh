@@ -9,3 +9,7 @@ mysqladmin --host="${PHINX_NEXUS_DB_HOST}" --user="${PHINX_NEXUS_DB_USER}" --pas
 cd "$(pwd)/lib"
 
 vendor/bin/phinx migrate -c phinx_template.php
+
+mysqldiff --server1="${PHINX_NEXUS_DB_USER}":"${PHINX_NEXUS_DB_PASSWORD}"@"${PHINX_NEXUS_DB_HOST}" "${PHINX_NEXUS_DB_NAME}":nexus_base --force --skip-table-options --compact
+
+vendor/bin/phinx rollback -c phinx_template.php -t 0
