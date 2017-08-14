@@ -14,6 +14,7 @@ services:
     ports:
       - 33066:3306
     restart: always
+    command: mysqld --sql-mode=MYSQL40
 
   teamcity-server:
     image: jetbrains/teamcity-server
@@ -26,7 +27,6 @@ services:
       - mysql
     env_file: .env
     restart: always
-    command: mysqld --sql-mode=MYSQL40
 
   teamcity-agent:
     build: ./docker/agents/phinx-nexus
