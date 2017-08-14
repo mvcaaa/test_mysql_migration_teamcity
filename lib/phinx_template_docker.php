@@ -1,7 +1,7 @@
 <?php
 return [
 		'environments' => [
-				'dev.mvc' => [
+				'docker' => [
 						'adapter'    => 'mysql',
 						'host'       => '%%PHINX_NEXUS_DB_HOST%%',
 						'name'       => '%%PHINX_NEXUS_DB_NAME%%',
