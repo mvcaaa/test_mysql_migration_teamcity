@@ -30,6 +30,7 @@ services:
 
   teamcity-agent:
     build: ./docker/agents/phinx-nexus
+    image: mvcaaa:tcagent-nexus
     env_file: .env-agent
     restart: always
     depends_on:
