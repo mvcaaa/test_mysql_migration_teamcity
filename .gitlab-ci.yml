@@ -1,1 +1,23 @@
 image: mvcaaa/tcagent-nexus
+
+cache:
+  paths:
+  - lib/vendor/
+
+services:
+  - mysql
+
+variables:
+  # Configure mysql service (https://hub.docker.com/_/mysql/)
+  MYSQL_ROOT_PASSWORD: SuperVGA256
+  PHINX_NEXUS_DB_HOST: mysql
+  PHINX_NEXUS_DB_NAME: nexus_dev
+  PHINX_NEXUS_DB_USER: root
+  PHINX_NEXUS_DB_PASSWORD: SuperVGA256
+
+before_script:
+  - scripts/teamcity/prepare.sh
+
+test:mysql:
+  script:
+    - scripts/teamcity/main.sh
