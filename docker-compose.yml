@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes:
   mysql_data: {}
@@ -6,15 +6,14 @@ volumes:
 
 services:
   mysql:
-    image: mysql
+    image: mysql:5.6
     volumes:
-      - M:\mysql_data:/var/lib/mysql
-#      - M:\mysql_config:/etc/mysql/conf.d
+      - M:\mysql_data_5.6:/var/lib/mysql
+      - M:\mysql_config:/etc/mysql/conf.d
     env_file: .env
     ports:
       - 33066:3306
-    restart: always
-    command: mysqld --sql-mode=MYSQL40
+    command: mysqld -v --explicit_defaults_for_timestamp=1
 
   teamcity-server:
     image: jetbrains/teamcity-server
@@ -26,13 +25,16 @@ services:
     depends_on:
       - mysql
     env_file: .env
-    restart: always
 
   teamcity-agent:
     build: ./docker/agents/phinx-nexus
-    image: mvcaaa:tcagent-nexus
+    image: mvcaaa/tcagent-nexus
     env_file: .env-agent
-    restart: always
     depends_on:
       - teamcity-server
       - mysql
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 512M

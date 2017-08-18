@@ -15,7 +15,7 @@ RUN echo $TZ > /etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
 
 # Install PHP stuff
-RUN apt-get install -y \
+RUN apt-get -y update && apt-get install -y \
   git \
   mysql-client \
   composer \
@@ -24,9 +24,31 @@ RUN apt-get install -y \
   php-mbstring \
   php-xml \
   php-dom \
-  php-simplexml \ 
-  wget \ 
-  mysql-utilities
+  php-simplexml \
+  php-xdebug \
+  php-gd \
+  php-opcache \
+  php-curl \
+  php-json \
+  php-readline \
+  php-zip \
+  php-bcmath \
+  php-mcrypt \
+  php-iconv \
+  php-gmp \
+  php-pspell \
+  php-bz2 \
+  php-mcrypt \
+  php-readline \
+  wget \
+  mysql-utilities \
+  redis-server \
+  redis-tools && \
+  apt-get remove php-mysqlnd
 
 # CleanUp
 RUN apt-get clean && apt-get purge
+
+# Start Redis
+ADD services /services
+RUN chmod -R 777 /services/*
